@@ -28,7 +28,7 @@ module TrafficSpy
         halt 403, "Registered Applicant Already Exists"
       elsif params.key?('identifier') && params.key?('rootUrl')
         Source.create(params)
-        halt 200, "Applicant successfully added"
+        status 200
       end
     end
 
@@ -36,6 +36,7 @@ module TrafficSpy
       identifier_id = Source.find_id_by(identifier)
       payload = JSON.parse(params[:payload])
       Url.create(payload, identifier_id)
+      status 200
     #   Referred_by.create(payload)
     #   EventName.create(payload)
     #   UserAgent.created(payload)
