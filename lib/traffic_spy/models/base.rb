@@ -13,3 +13,4 @@ end
 # Require all the files within the model directory here...
 
 require 'traffic_spy/models/source'
+require 'traffic_spy/models/url'
