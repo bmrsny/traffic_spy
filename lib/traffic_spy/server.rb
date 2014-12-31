@@ -22,13 +22,13 @@ module TrafficSpy
     end
 
     post '/sources' do
-      if params.key?('identifier') && params.key?('rootUrl')
+      if !params.key?('identifier') || !params.key?('rootUrl')
+        status 400
+      elsif Source.exist?(params[:identifier])
+        status 403
+      elsif params.key?('identifier') && params.key?('rootUrl')
         Source.create(params)
         status 200
-      elsif !params.key?('identifier') || !params.key?('rootUrl')
-        status 400
-      else
-        status 403
       end
     end
   end
