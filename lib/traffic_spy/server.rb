@@ -23,13 +23,22 @@ module TrafficSpy
 
     post '/sources' do
       if !params.key?('identifier') || !params.key?('rootUrl')
-        status 400
+        halt 400, "Missing Parameter(s)"
       elsif Source.exist?(params[:identifier])
-        status 403
+        halt 403, "Registered Applicant Already Exists"
       elsif params.key?('identifier') && params.key?('rootUrl')
         Source.create(params)
-        status 200
+        halt 200, "Applicant successfully added"
       end
+    end
+
+    post '/sources/:identifier/data' do |identifier|
+      identifier_id = Source.find_id_by(identifier)
+      payload = JSON.parse(params[:payload])
+      Url.create(payload, identifier_id)
+    #   Referred_by.create(payload)
+    #   EventName.create(payload)
+    #   UserAgent.created(payload)
     end
   end
 end
