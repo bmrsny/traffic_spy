@@ -23,10 +23,8 @@ module TrafficSpy
 
     post '/sources' do
       if params.key?('identifier') && params.key?('rootUrl')
+        Source.create(params)
         status 200
-        identifier = params[:identifier]
-        rootUrl = params[:rootUrl]
-        # create table identifier(id)
       elsif !params.key?('identifier') || !params.key?('rootUrl')
         status 400
       else

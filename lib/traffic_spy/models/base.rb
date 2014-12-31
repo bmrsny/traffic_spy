@@ -9,9 +9,7 @@ module TrafficSpy
 
 end
 
-#
+
 # Require all the files within the model directory here...
-#
-# @example
-#
-# require 'traffic_spy/models/request'
+
+require 'traffic_spy/models/source'
