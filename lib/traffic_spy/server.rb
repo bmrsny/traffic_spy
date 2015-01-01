@@ -33,10 +33,19 @@ module TrafficSpy
     end
 
     post '/sources/:identifier/data' do |identifier|
-      identifier_id = Source.find_id_by(identifier)
       payload = JSON.parse(params[:payload])
-      Url.create(payload, identifier_id)
-      status 200
+      if !payload.key?('url')
+        halt 400, "Payload has no url key"
+      elsif Payload.exist?(payload)
+        halt 403, "Payload exists in the Payload database"
+      elsif
+        require 'pry'; binding.pry
+        Payload.create(payload)
+        identifier_id = Source.find_id_by(identifier)
+        # payload = JSON.parse(payload)
+        Url.create(payload, identifier_id)
+        status 200
+      end
     #   Referred_by.create(payload)
     #   EventName.create(payload)
     #   UserAgent.created(payload)

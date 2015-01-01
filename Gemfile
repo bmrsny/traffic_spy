@@ -10,6 +10,7 @@ group :development do
   gem 'rb-fsevent', '~> 0.9'
   gem 'pg'
   gem 'sqlite3'
+  gem 'pry'
 end
 
 group :evaluations do
