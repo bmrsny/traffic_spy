@@ -4,7 +4,7 @@ Sequel.migration do
       primary_key   :id
       String        :url
       String        :requestedAt
-      String        :respondedIn
+      Integer        :respondedIn
       String        :referredBy
       String        :requestType
       String        :parameters
@@ -12,7 +12,12 @@ Sequel.migration do
       String        :userAgent
       Integer       :resolutionWidth
       Integer       :resolutionHeight
-      Integer       :ip
+      String        :ip
+      # unique        [
+      #               :id
+      #               :url
+      #               :re
+      # ]
     end
   end
 end
