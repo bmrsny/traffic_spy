@@ -26,7 +26,7 @@ module TrafficSpy
 
     def self.find_id_by(identifier)
       table.where(
-        :identifier => identifier
+      :identifier => identifier
       ).to_a.first[:id]
     end
   end

@@ -8,35 +8,41 @@ module TrafficSpy
 
     def self.create(attributes)
       #might need to turn symbols into strings
-      binding.pry
+      # binding.pry
       table.insert(
-      :url => attributes[:url],
-      :requestedAt => attributes[:requestedAt],
-      :respondedIn => attributes[:respondedIn],
-      :referredBy => attributes[:referredBy],
-      :requestType => attributes[:requestType],
-      :parameters => attributes[:parameters],
-      :eventName => attributes[:eventName],
-      :userAgent => attributes[:userAgent],
-      :resolutionWidth => attributes[:resolutionWidth],
-      :resolutionHeight => attributes[:resolutionHeight],
-      :ip => attributes[:ip]
+      :url => attributes["url"],
+      :requestedAt => attributes["requestedAt"],
+      :respondedIn => attributes["respondedIn"],
+      :referredBy => attributes["referredBy"],
+      :requestType => attributes["requestType"],
+      :parameters => attributes["parameters"],
+      :eventName => attributes["eventName"],
+      :userAgent => attributes["userAgent"],
+      :resolutionWidth => attributes["resolutionWidth"],
+      :resolutionHeight => attributes["resolutionHeight"],
+      :ip => attributes["ip"]
       )
+
+    # rescue Sequel::ForeignKeyContraintViolation
+    #   false
+    # rescue Sequel::UniqueContraintviolation
+    #   false
+
     end
 
     def self.exist?(attributes)
       table.where(
-        :url => attributes[:url],
-        :requestedAt => attributes[:requestedAt],
-        :respondedIn => attributes[:respondedIn],
-        :referredBy => attributes[:referredBy],
-        :requestType => attributes[:requestType],
-        :parameters => attributes[:parameters],
-        :eventName => attributes[:eventName],
-        :userAgent => attributes[:userAgent],
-        :resolutionWidth => attributes[:resolutionWidth],
-        :resolutionHeight => attributes[:resolutionHeight],
-        :ip => attributes[:ip]
+         attributes["url"] &&
+         attributes["requestedAt"] &&
+         attributes["respondedIn"] &&
+         attributes["referredBy"] &&
+         attributes["requestType"] &&
+         attributes["parameters"] &&
+         attributes["eventName"] &&
+         attributes["userAgent"] &&
+         attributes["resolutionWidth"] &&
+         attributes["resolutionHeight"] &&
+         attributes["ip"]
       ).count > 0
 
       #why no working?
