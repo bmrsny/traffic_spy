@@ -19,3 +19,11 @@ group :evaluations do
   gem 'reek'
   gem 'rake'
 end
+
+
+group :test do
+  gem 'capybara'
+  gem 'minitest'
+  gem 'rack-test'
+  gem 'nokogiri'
+end

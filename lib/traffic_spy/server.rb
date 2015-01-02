@@ -21,7 +21,7 @@ module TrafficSpy
       erb :error
     end
 
-    post '/sources' do
+    post '/sources' do 
       if !params.key?('identifier') || !params.key?('rootUrl')
         halt 400, "Missing Parameter(s)"
       elsif Source.exist?(params[:identifier])
