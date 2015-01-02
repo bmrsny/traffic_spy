@@ -13,10 +13,5 @@ module TrafficSpy
       )
     end
 
-    def self.exist?(attributes)
-      table.where(
-      attributes["respondedIn"]).count > 0
-    end
-
   end
 end
