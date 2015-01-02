@@ -17,5 +17,12 @@ module TrafficSpy
         :identifier => identifier
       ).count > 0
     end
+
+    def self.find_id_by(url)
+      table.where(
+      :url => url
+      ).to_a.first[:id]
+    end
+
   end
 end

@@ -4,7 +4,7 @@ Sequel.migration do
       primary_key   :id
       String        :url
       String        :requestedAt
-      Integer        :respondedIn
+      Integer       :respondedIn
       String        :referredBy
       String        :requestType
       String        :parameters

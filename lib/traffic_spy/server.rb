@@ -34,16 +34,20 @@ module TrafficSpy
 
     post '/sources/:identifier/data' do |identifier|
       payload = JSON.parse(params[:payload])
-      if Source.exist?(params[:identifier])
+      if Source.exist?(identifier)
         if !payload.key?('url')
           halt 400, "Payload has no url key"
+        #payload.exist is broken right now
         elsif Payload.exist?(payload)
           halt 403, "Payload exists in the Payload database"
         elsif
-          Payload.create(payload)
-          identifier_id = Source.find_id_by(identifier)
-          # payload = JSON.parse(payload)
-          Url.create(payload, identifier_id)
+          Payload.create(payload)  #payload creates the first time
+          Url.create(payload, Source.find_id_by(identifier))
+          RespondedIn.create(payload, Url.find_id_by(payload["url"]))
+          # Url.create(payload, Source.find_id_by(identifier))
+          # Url.create(payload, Source.find_id_by(identifier))
+          # Url.create(payload, Source.find_id_by(identifier))
+          # Url.create(payload, Source.find_id_by(identifier))
           status 200
         end
       else
