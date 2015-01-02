@@ -21,7 +21,7 @@ module TrafficSpy
       erb :error
     end
 
-    post '/sources' do 
+    post '/sources' do
       if !params.key?('identifier') || !params.key?('rootUrl')
         halt 400, "Missing Parameter(s)"
       elsif Source.exist?(params[:identifier])
@@ -57,5 +57,14 @@ module TrafficSpy
     #   EventName.create(payload)
     #   UserAgent.created(payload)
     end
+
+    get '/sources/:identifier' do |identifier|
+      source_id = Source.find_id_by(identifier)
+      sorted_urls = Url.sorted_urls(source_id)
+      erb :application_details, locals: {sorted_urls: sorted_urls}
+    end
+
+
+
   end
 end
