@@ -1,6 +1,6 @@
 module TrafficSpy
 
-  class RespondedIn
+  class ReferredBy
 
     def self.table
       DB.from(:referredBy)
@@ -8,14 +8,9 @@ module TrafficSpy
 
     def self.create(attributes, url_id)
       table.insert(
-      :time => attributes["respondedIn"],
+      :url_address => attributes["referredBy"],
       :url_id => url_id
       )
-    end
-
-    def self.exist?(attributes)
-      table.where(
-      attributes["respondedIn"]).count > 0
     end
 
   end
