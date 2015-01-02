@@ -15,7 +15,7 @@ module TrafficSpy
       :respondedIn => attributes["respondedIn"],
       :referredBy => attributes["referredBy"],
       :requestType => attributes["requestType"],
-      :parameters => attributes["parameters"],
+      :parameters => attributes["parameters"].join(','),
       :eventName => attributes["eventName"],
       :userAgent => attributes["userAgent"],
       :resolutionWidth => attributes["resolutionWidth"],
@@ -31,19 +31,20 @@ module TrafficSpy
     end
 
     def self.exist?(attributes)
-      table.where(
-         attributes["url"] &&
-         attributes["requestedAt"] &&
-         attributes["respondedIn"] &&
-         attributes["referredBy"] &&
-         attributes["requestType"] &&
-         attributes["parameters"] &&
-         attributes["eventName"] &&
-         attributes["userAgent"] &&
-         attributes["resolutionWidth"] &&
-         attributes["resolutionHeight"] &&
-         attributes["ip"]
-      ).count > 0
+      test = table.where(
+        :url => attributes["url"],
+        :requestedAt => attributes["requestedAt"],
+        :respondedIn => attributes["respondedIn"],
+        :referredBy => attributes["referredBy"],
+        :requestType => attributes["requestType"],
+        :parameters => attributes["parameters"].join(','),
+        :eventName => attributes["eventName"],
+        :userAgent => attributes["userAgent"],
+        :resolutionWidth => attributes["resolutionWidth"],
+        :resolutionHeight => attributes["resolutionHeight"],
+        :ip => attributes["ip"]
+      )
+      .count > 0
 
       #why no working?
       # table.where(
