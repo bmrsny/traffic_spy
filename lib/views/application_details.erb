@@ -1,11 +1,23 @@
 <h1>
   <strong> URLs associated with an identifier, sorted by frequency </strong>
 </h1>
-<% sorted_urls.each do |url| %>
-<ul>
-  <li>
-    <strong> frequency: </strong> <%= url[1]%>, <strong> Url: </strong> <%= url[0] %>
-  </li>
-</ul>
-<% end %>
-</body>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Frequency: </th>
+          <th>Url: </th>
+        </tr>
+        <tbody>
+        <% sorted_urls.each do |url| %>
+          <tr>
+            <td><%= url[1] %></td>
+            <td><%= url[0] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>

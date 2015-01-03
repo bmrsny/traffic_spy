@@ -50,7 +50,7 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier' do |identifier|
+      get '/sources/:identifier' do |identifier|
       sorted_urls = Payload.sorted_urls_by(identifier)
       erb :application_details, locals: {sorted_urls: sorted_urls}
     end
