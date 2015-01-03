@@ -3,7 +3,7 @@ module TrafficSpy
   class RespondedIn
 
     def self.table
-      DB.from(:respondedIn)
+      DB.from(:respondedIns)
     end
 
     def self.create(attributes, url_id)

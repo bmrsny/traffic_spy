@@ -7,20 +7,18 @@ module TrafficSpy
     end
 
     def self.create(attributes)
-      #might need to turn symbols into strings
-      # binding.pry
       table.insert(
-      :url => attributes["url"],
+      :url_id => Url.return_id(attributes["url"]),
       :requestedAt => attributes["requestedAt"],
       :respondedIn => attributes["respondedIn"],
-      :referredBy => attributes["referredBy"],
-      :requestType => attributes["requestType"],
-      :parameters => attributes["parameters"].join(','),
-      :eventName => attributes["eventName"],
-      :userAgent => attributes["userAgent"],
-      :resolutionWidth => attributes["resolutionWidth"],
-      :resolutionHeight => attributes["resolutionHeight"],
-      :ip => attributes["ip"]
+      :referredBy_id => ReferredBy.return_id(attributes["referredBy"])
+      # :requestType => attributes["requestType"],
+      # :parameters => attributes["parameters"].join(','),
+      # :eventName => attributes["eventName"],
+      # :userAgent => attributes["userAgent"],
+      # :resolutionWidth => attributes["resolutionWidth"],
+      # :resolutionHeight => attributes["resolutionHeight"],
+      # :ip => attributes["ip"]
       )
 
     # rescue Sequel::ForeignKeyContraintViolation
@@ -31,20 +29,20 @@ module TrafficSpy
     end
 
     def self.exist?(attributes)
-      test = table.where(
-        :url => attributes["url"],
-        :requestedAt => attributes["requestedAt"],
-        :respondedIn => attributes["respondedIn"],
-        :referredBy => attributes["referredBy"],
-        :requestType => attributes["requestType"],
-        :parameters => attributes["parameters"].join(','),
-        :eventName => attributes["eventName"],
-        :userAgent => attributes["userAgent"],
-        :resolutionWidth => attributes["resolutionWidth"],
-        :resolutionHeight => attributes["resolutionHeight"],
-        :ip => attributes["ip"]
-      )
-      .count > 0
+      table.where(
+      :url_id => Url.return_id(attributes["url"]),
+      :requestedAt => attributes["requestedAt"],
+      :respondedIn => attributes["respondedIn"],
+      :referredBy_id => ReferredBy.return_id(attributes["referredBy"])
+      # :requestType => attributes["requestType"],
+      # :parameters => attributes["parameters"].join(','),
+      # :eventName => attributes["eventName"],
+      # :userAgent => attributes["userAgent"],
+      # :resolutionWidth => attributes["resolutionWidth"],
+      # :resolutionHeight => attributes["resolutionHeight"],
+      # :ip => attributes["ip"]
+      ).count > 0
+      require 'pry' ; binding.pry
 
       #why no working?
       # table.where(

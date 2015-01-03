@@ -1,8 +1,9 @@
 Sequel.migration do
   change do
-    create_table(:event) do
+    create_table(:userAgents) do
       primary_key   :id
-      String        :event
+      String        :OS
+      String        :Browser
       Integer       :source_id
     end
   end
