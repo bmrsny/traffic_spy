@@ -38,10 +38,10 @@ module TrafficSpy
       if Source.exist?(identifier)
         if !payload.key?('url')
           halt 400, "Payload has no url key"
-        elsif Payload.exist?(payload)
+        elsif Payload.exist?(payload, identifier)
           halt 403, "Payload exists in the Payload database"
         elsif
-          Payload.create(payload)
+          Payload.create(payload, identifier)
           status 200
         end
       else
