@@ -26,7 +26,7 @@ module TrafficSpy
         table.insert(
         :url_address => url_address
         )
-        table.select(:id)
+        table.select(:id).to_a.last[:id]
       end
     end
 

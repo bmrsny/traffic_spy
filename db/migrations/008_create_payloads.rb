@@ -10,8 +10,8 @@ Sequel.migration do
       String        :parameters
       foreign_key   :eventName_id, :events
       foreign_key   :userAgent_id, :userAgents
-      foreign_key   :resolution_width_id, :resolutions
-      foreign_key   :resolution_height_id, :resolutions
+      foreign_key   :resolution_id, :resolutions
+      # foreign_key   :resolution_height_id, :resolutions
       String        :ip
 
       # unique        [
