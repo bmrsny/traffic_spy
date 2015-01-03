@@ -59,8 +59,9 @@ module TrafficSpy
       source_id = Source.find_id_by(identifier)
       #this code below is strange but this works... orion explained this to me.
       combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
-      combined_db.where(:source_id => source_id)
-      
+      filtered_db = combined_db.where(:source_id => source_id)
+      x = filtered_db.to_a.map {|hash| hash[:url]}.inject(Hash.new(0)) {|total, url| total[url] += 1; total}
+      y = x.sort_by {|key, value| value}.reverse
       #this works okay... this will give you an array of hashes where the narrowed down the payload down to a single identifier. Now what?
     end
 
