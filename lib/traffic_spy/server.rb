@@ -46,12 +46,12 @@ module TrafficSpy
         end
       else
         "Please register first fucker"
+        status 403
       end
     end
 
     get '/sources/:identifier' do |identifier|
-      source_id = Source.find_id_by(identifier)
-      sorted_urls = Url.sorted_urls(source_id)
+      sorted_urls = Payload.sorted_urls_by(identifier)
       erb :application_details, locals: {sorted_urls: sorted_urls}
     end
 

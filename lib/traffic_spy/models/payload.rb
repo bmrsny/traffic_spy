@@ -16,9 +16,8 @@ module TrafficSpy
       :parameters => attributes["parameters"].join(','),
       :eventName_id => Event.return_id(attributes["eventName"]),
       :userAgent_id => UserAgent.return_id(attributes["userAgent"]),
-      :resolution_id => Resolution.return_id(attributes)
-      # :resolution_height_id => Resolution.return_id(attributes["resolutionHeight"])
-      # :ip => attributes["ip"]
+      :resolution_id => Resolution.return_id(attributes),
+      :ip => attributes["ip"]
       )
 
     # rescue Sequel::ForeignKeyContraintViolation
@@ -38,9 +37,8 @@ module TrafficSpy
       :parameters => attributes["parameters"].join(','),
       :eventName_id => Event.return_id(attributes["eventName"]),
       :userAgent_id => UserAgent.return_id(attributes["userAgent"]),
-      :resolution_id => Resolution.return_id(attributes)
-      # :resolution_height_id => Resolution.return_id(attributes["resolutionHeight"]),
-      # :ip => attributes["ip"]
+      :resolution_id => Resolution.return_id(attributes),
+      :ip => attributes["ip"]
       ).count > 0
 
       #why no working?
@@ -54,5 +52,9 @@ module TrafficSpy
       :identifier => identifier
       ).to_a.first[:id]
     end
+
+    # def self.sorted_urls_by(identifier)
+    #
+    # end
   end
 end
