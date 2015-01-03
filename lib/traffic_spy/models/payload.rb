@@ -11,13 +11,13 @@ module TrafficSpy
       :url_id => Url.return_id(attributes["url"]),
       :requestedAt => attributes["requestedAt"],
       :respondedIn => attributes["respondedIn"],
-      :referredBy_id => ReferredBy.return_id(attributes["referredBy"])
-      # :requestType => attributes["requestType"],
-      # :parameters => attributes["parameters"].join(','),
-      # :eventName => attributes["eventName"],
-      # :userAgent => attributes["userAgent"],
-      # :resolutionWidth => attributes["resolutionWidth"],
-      # :resolutionHeight => attributes["resolutionHeight"],
+      :referredBy_id => ReferredBy.return_id(attributes["referredBy"]),
+      :requestType => attributes["requestType"],
+      :parameters => attributes["parameters"].join(','),
+      :eventName_id => Event.return_id(attributes["eventName"]),
+      :userAgent_id => UserAgent.return_id(attributes["userAgent"]),
+      :resolution_id => Resolution.return_id(attributes)
+      # :resolution_height_id => Resolution.return_id(attributes["resolutionHeight"])
       # :ip => attributes["ip"]
       )
 
@@ -33,16 +33,15 @@ module TrafficSpy
       :url_id => Url.return_id(attributes["url"]),
       :requestedAt => attributes["requestedAt"],
       :respondedIn => attributes["respondedIn"],
-      :referredBy_id => ReferredBy.return_id(attributes["referredBy"])
-      # :requestType => attributes["requestType"],
-      # :parameters => attributes["parameters"].join(','),
-      # :eventName => attributes["eventName"],
-      # :userAgent => attributes["userAgent"],
-      # :resolutionWidth => attributes["resolutionWidth"],
-      # :resolutionHeight => attributes["resolutionHeight"],
+      :referredBy_id => ReferredBy.return_id(attributes["referredBy"]),
+      :requestType => attributes["requestType"],
+      :parameters => attributes["parameters"].join(','),
+      :eventName_id => Event.return_id(attributes["eventName"]),
+      :userAgent_id => UserAgent.return_id(attributes["userAgent"]),
+      :resolution_id => Resolution.return_id(attributes)
+      # :resolution_height_id => Resolution.return_id(attributes["resolutionHeight"]),
       # :ip => attributes["ip"]
       ).count > 0
-      require 'pry' ; binding.pry
 
       #why no working?
       # table.where(
