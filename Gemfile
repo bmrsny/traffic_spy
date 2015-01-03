@@ -11,6 +11,8 @@ group :development do
   gem 'pg'
   gem 'sqlite3'
   gem 'pry'
+  gem 'useragent'
+  gem 'pry-byebug'
 end
 
 group :evaluations do
