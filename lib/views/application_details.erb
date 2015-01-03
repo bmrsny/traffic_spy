@@ -1,6 +1,7 @@
 <h1>
-  <strong> URLs associated with an identifier, sorted by frequency </strong>
+<strong><%= identifier.capitalize %></strong>
 </h1>
+<h3>Url Breakdown</h3>
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped">
@@ -16,6 +17,51 @@
             <td><%= url[0] %></td>
           </tr>
         <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
+
+
+<h3>Browser Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Frequency: </th>
+          <th>Browser: </th>
+        </tr>
+        <tbody>
+          <% web_browser_breakdown.each do |browser| %>
+          <tr>
+            <td><%= browser[1] %></td>
+            <td><%= browser[0] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<h3>Operating System Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Frequency: </th>
+          <th>OS: </th>
+        </tr>
+        <tbody>
+          <% os_browser_breakdown.each do |browser| %>
+          <tr>
+            <td><%= browser[1] %></td>
+            <td><%= browser[0] %></td>
+          </tr>
+          <% end %>
         </tbody>
       </thead>
     </table>

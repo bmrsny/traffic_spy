@@ -1,6 +1,7 @@
 module TrafficSpy
 
   class Url
+
     def self.table
       DB.from(:urls)
     end

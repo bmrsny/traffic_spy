@@ -1,6 +1,7 @@
 module TrafficSpy
-
   class Payload
+    extend ModelHelper
+
 
     def self.table
       DB.from(:payloads)
@@ -55,14 +56,13 @@ module TrafficSpy
     #   ).to_a.first[:id]
     # end
 
+
     def self.sorted_urls_by(identifier)
-      source_id = Source.find_id_by(identifier)
-      #this code below is strange but this works... orion explained this to me.
       combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
-      filtered_db = combined_db.where(:source_id => source_id)
-      x = filtered_db.to_a.map {|hash| hash[:url]}.inject(Hash.new(0)) {|total, url| total[url] += 1; total}
-      y = x.sort_by {|key, value| value}.reverse
-      #this works okay... this will give you an array of hashes where the narrowed down the payload down to a single identifier. Now what?
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      sorted_hashes = filtered_db.to_a.map {|hash| hash[:url]}.inject(Hash.new(0)) {|hash, url| hash[url] += 1; hash}
+      desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
+
     end
 
 
