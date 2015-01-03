@@ -41,21 +41,12 @@ module TrafficSpy
         elsif Payload.exist?(payload)
           halt 403, "Payload exists in the Payload database"
         elsif
-          Payload.create(payload)  #payload creates the first time
-          Url.create(payload, Source.find_id_by(identifier))
-          RespondedIn.create(payload, Url.find_id_by(payload["url"]))
-          ReferredBy.create(payload, Url.find_id_by(payload["url"]))
-          UserAgent.create(payload, Source.find_id_by(identifier))
-          Resolution.create(payload, Source.find_id_by(identifier))
-          Event.create(payload, Source.find_id_by(identifier))
+          Payload.create(payload)
           status 200
         end
       else
         "Please register first fucker"
       end
-    #   Referred_by.create(payload)
-    #   EventName.create(payload)
-    #   UserAgent.created(payload)
     end
 
     get '/sources/:identifier' do |identifier|

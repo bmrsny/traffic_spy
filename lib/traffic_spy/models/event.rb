@@ -3,7 +3,7 @@ module TrafficSpy
   class Event
 
     def self.table
-      DB.from(:event)
+      DB.from(:events)
     end
 
     def self.create(attributes, source_id)

@@ -1,8 +1,8 @@
 Sequel.migration do
   change do
-    create_table(:resolution) do
+    create_table(:events) do
       primary_key   :id
-      String        :resolution
+      String        :event
       Integer       :source_id
     end
   end

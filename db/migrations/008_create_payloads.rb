@@ -2,17 +2,18 @@ Sequel.migration do
   change do
     create_table(:payloads) do
       primary_key   :id
-      String        :url
-      String        :requestedAt
+      foreign_key   :url_id, :urls
+      DateTime      :requestedAt
       Integer       :respondedIn
-      String        :referredBy
+      foreign_key   :referredBy_id, :referredBys
       String        :requestType
       String        :parameters
-      String        :eventName
-      String        :userAgent
-      Integer       :resolutionWidth
-      Integer       :resolutionHeight
+      foreign_key   :eventName_id, :events
+      foreign_key   :userAgent_id, :userAgents
+      foreign_key   :resolution_width_id, :resolutions
+      foreign_key   :resolution_height_id, :resolutions
       String        :ip
+
       # unique        [
       #               :id
       #               :url

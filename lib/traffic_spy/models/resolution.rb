@@ -3,7 +3,7 @@ module TrafficSpy
   class Resolution
 
     def self.table
-      DB.from(:resolution)
+      DB.from(:resolutions)
     end
 
     def self.create(attributes, source_id)
