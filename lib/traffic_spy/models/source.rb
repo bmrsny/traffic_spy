@@ -29,5 +29,11 @@ module TrafficSpy
       :identifier => identifier
       ).to_a.first[:id]
     end
+
+    def self.return_id(identifier)
+      table.where(
+      :identifier => identifier
+      ).to_a.first[:id]
+    end
   end
 end
