@@ -54,6 +54,8 @@ module TrafficSpy
       sorted_urls = Payload.sorted_urls_by(identifier)
       web_browser_breakdown = UserAgent.web_browser_breakdown_by(identifier)
       os_browser_breakdown = UserAgent.web_os_breakdown_by(identifier)
+      sorted_resolutions = Resolution.sorted_resoutions_by(identifier)
+
       erb :application_details, locals: {
         sorted_urls: sorted_urls,
         web_browser_breakdown: web_browser_breakdown,
