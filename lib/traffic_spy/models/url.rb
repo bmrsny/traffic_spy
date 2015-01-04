@@ -40,9 +40,11 @@ module TrafficSpy
 
     def self.url_relative_path(identifier, path)
       sorted_urls_by(identifier).map do |array|
-        path
-          # .select {|url_path| URI(url_path).path == path }
-      end
+        url = array[0]
+        clean_url_path = URI(url).path.gsub(/^\//, "")
+        clean_url_path
+      end.uniq.select { |sorted_path| sorted_path == path }
+          .join
     end
 
     # def self.find_id_by(url)
