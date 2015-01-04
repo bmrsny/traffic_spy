@@ -50,7 +50,7 @@ module TrafficSpy
       combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
       filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
       urls_and_times = filtered_db.select(:url, :respondedIn)
-      clean_url = url_cleaner(full_url, identifier)
+      clean_url = url_cleaner(identifier, full_url)
       filter_by_url = urls_and_times.where(:url => clean_url)
     end
 
@@ -62,11 +62,19 @@ module TrafficSpy
       url_response_times(identifier, full_url).avg(:respondedIn).to_i
     end
 
-    def self.url_cleaner(full_url, identifier)
+    def self.url_cleaner(identifier, full_url)
       x = full_url.split('/').delete_if {|ele| ele == 'sources' || ele == 'urls' || ele == "" || ele == "#{identifier}"}.join('/')
       x.gsub('localhost:9393', "/#{identifier}.com")
     end
 
+    def self.url_verbs(identifier, full_url)
+      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      urls_and_request_types = filtered_db.select(:url, :requestType)
+      clean_url = url_cleaner(identifier, full_url)
+      filter_by_url = urls_and_request_types.where(:url => clean_url)
+      filter_by_url.to_hash(:requestType).keys.join(' ')
+    end
     # def self.find_id_by(url)
     #   table.where(
     #   :url => url
