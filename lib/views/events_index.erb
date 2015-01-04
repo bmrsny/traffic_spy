@@ -1,0 +1,22 @@
+<h1>
+  <strong><%= identifier.capitalize %></strong>
+</h1>
+<h3>Events Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Received Events in Descending Order</th>
+        </tr>
+        <tbody>
+          <% sorted_events.each do |event| %>
+          <tr>
+            <td><%= event[:event] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
