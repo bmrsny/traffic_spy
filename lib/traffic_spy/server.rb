@@ -71,7 +71,7 @@ module TrafficSpy
         body "This identifier does not exist"
       end
     end
-    
+
     get '/sources/:identifier/urls/:relative/?:path?' do |identifier, relative, path|
       full_url = request.url
       if Url.relative_check?(identifier, full_url)
@@ -88,8 +88,14 @@ module TrafficSpy
         }
       else
         status 403
-        body "This url has not been requested"
+        body "This url has never been requested"
       end
+    end
+
+    get '/sources/:identifier/events' do |identifier|
+      sorted_events = Event.sorted_events_by(identifier)
+
+      erb :events_index, locals: {sorted_events: sorted_events, identifier: identifier}
     end
   end
 end

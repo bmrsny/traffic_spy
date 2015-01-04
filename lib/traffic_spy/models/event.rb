@@ -1,9 +1,16 @@
 module TrafficSpy
 
   class Event
+    extend ModelHelper
 
     def self.table
       DB.from(:events)
+    end
+
+    def self.sorted_events_by(identifier)
+      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:events, :id => :eventName_id)
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      filtered_db.order(Sequel.desc(:event)).select(:event).to_a.uniq
     end
 
     # def self.create(attributes, source_id)
