@@ -70,18 +70,13 @@ module TrafficSpy
     get '/sources/:identifier/urls/:relative/?:path' do |identifier, relative, path|
       sorted_urls = Url.sorted_urls_by(identifier)
       url_relative_path = Url.url_relative_path(identifier, path)
-      #need to grab unique identifiers urls and sort them --- DONE
-      #take sorted list and filter them by path? where the relative_path == URI(url).path
+      url_shortest_response = Url.url_path_shortest_response(identifier, path)
 
-      #go to this page and list out all url stats....
-      #send url to html so we can reference the name as table name
-      #render a table for this specific url path?
-      #create a table to hold information
-      #such as longest and shortest response time most popular refers
       erb :url_statistics, locals: {
           identifier: identifier,
           sorted_urls: sorted_urls,
-          url_relative_path: url_relative_path
+          url_relative_path: url_relative_path,
+          url_shortest_response: url_shortest_response
       }
     end
   end
