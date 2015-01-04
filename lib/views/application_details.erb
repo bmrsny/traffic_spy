@@ -67,3 +67,47 @@
     </table>
   </div>
 </div>
+
+<h3>Resolution Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Frequency: </th>
+          <th>Resolution: </th>
+        </tr>
+        <tbody>
+          <% sorted_resolutions.each do |resolution| %>
+          <tr>
+            <td><%= resolution[1] %></td>
+            <td><%= resolution[0] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<h3>Urls and Avg Response Times Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Avg Response Time: </th>
+          <th>URL </th>
+        </tr>
+        <tbody>
+          <% urls_and_times.each do |url_and_time| %>
+          <tr>
+            <td><%= url_and_time.values.pop %></td>
+            <td><%= url_and_time.keys.pop %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>

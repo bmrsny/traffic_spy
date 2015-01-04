@@ -1,17 +1,18 @@
 module TrafficSpy
 
   class Resolution
+    extend ModelHelper
 
     def self.table
       DB.from(:resolutions)
     end
 
-    def self.create(attributes, source_id)
-      table.insert(
-      :resolution => resolution(attributes),
-      :source_id => source_id
-      )
-    end
+    # def self.create(attributes, source_id)
+    #   table.insert(
+    #   :resolution => resolution(attributes),
+    #   :source_id => source_id
+    #   )
+    # end
 
     def self.resolution(attributes)
       attributes["resolutionWidth"] + " x " + attributes["resolutionHeight"]
@@ -35,8 +36,11 @@ module TrafficSpy
     end
 
     def self.sorted_resolutions_by(identifier)
-      
+      filtered_db = DB.from(:sources).join(:payloads, :source_id => :id)
+                       .join(:resolutions, :id => :resolution_id)
+                       .where(:source_id => identifier_id(identifier))
 
+      filtered_db.to_a.map {|hash| hash[:resolution]}.inject(Hash.new(0)) {|hash, reso| hash[reso] += 1; hash}.sort_by {|key, value| value}
     end
 
     # def self.user_agent_breakdown(identifier)

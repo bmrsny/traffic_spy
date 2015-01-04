@@ -57,15 +57,6 @@ module TrafficSpy
     # end
 
 
-    def self.sorted_urls_by(identifier)
-      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
-      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
-      sorted_hashes = filtered_db.to_a.map {|hash| hash[:url]}.inject(Hash.new(0)) {|hash, url| hash[url] += 1; hash}
-      desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
-
-    end
-
-
     # DB[:items].join(:categories, :id => :category_id).join(:groups, :id => :items__group_id)
     # below is SQL equivalent
     # # SELECT * FROM items
