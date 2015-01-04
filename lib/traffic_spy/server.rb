@@ -67,9 +67,9 @@ module TrafficSpy
 
         }
     end
-    get '/sources/:identifier/urls/:relative/?:path' do |identifier, relative, path|
+    get '/sources/:identifier/urls/:relative/?:path?' do |identifier, relative, path|
       sorted_urls = Url.sorted_urls_by(identifier)
-      url_relative_path = Url.url_relative_path(identifier, path)
+      url_relative_path = Url.url_relative_path(identifier, relative)
       url_shortest_response = Url.url_path_shortest_response(identifier, path)
 
       erb :url_statistics, locals: {
