@@ -1,4 +1,31 @@
 <h1>
-  Hello Fucker
+  Url Stats!!!!
 </h1>
-<h3>Url Stats</h3>
+<h3>
+  <strong><%= identifier.capitalize %></strong>
+  <p>Where the path is:
+    <%= url_relative_path %>
+  </p>
+</h3>
+<h4>Url Specific statistics</h4>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Longest Response Time</th>
+          <th>Shortest Response Time</th>
+        </tr>
+        <tbody>
+          <% sorted_urls.each do |url| %>
+          <tr>
+            <td>LONG TIME</td>
+            <td>SHORT TIME</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
+<h3><a href="/sources/<%= identifier %>"><<< Back to Identifier table</a></h3>

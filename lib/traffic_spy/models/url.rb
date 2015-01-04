@@ -38,8 +38,11 @@ module TrafficSpy
       desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
     end
 
-    def path_striper(url)
-      Uri(url)
+    def self.url_relative_path(identifier, path)
+      sorted_urls_by(identifier).map do |array|
+        path
+          # .select {|url_path| URI(url_path).path == path }
+      end
     end
 
     # def self.find_id_by(url)
