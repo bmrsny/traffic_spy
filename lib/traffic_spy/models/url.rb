@@ -75,6 +75,17 @@ module TrafficSpy
       filter_by_url = urls_and_request_types.where(:url => clean_url)
       filter_by_url.to_hash(:requestType).keys.join(' ')
     end
+
+    def self.relative_check?(identifier, full_url)
+      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      clean_url = url_cleaner(identifier, full_url)
+      exists?(clean_url, filtered_db)
+    end
+
+    def self.exists?(clean_url, filtered_db)
+      filtered_db.where(:url => clean_url).to_a.count > 0
+    end
     # def self.find_id_by(url)
     #   table.where(
     #   :url => url

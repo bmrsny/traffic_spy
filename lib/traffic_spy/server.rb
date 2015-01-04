@@ -51,35 +51,45 @@ module TrafficSpy
     end
 
     get '/sources/:identifier' do |identifier|
-      sorted_urls = Url.sorted_urls_by(identifier)
-      web_browser_breakdown = UserAgent.web_browser_breakdown_by(identifier)
-      os_browser_breakdown = UserAgent.web_os_breakdown_by(identifier)
-      sorted_resolutions = Resolution.sorted_resolutions_by(identifier)
-      urls_and_times = RespondedIn.urls_and_times_by(identifier)
+      if Source.exist?(identifier)
+        sorted_urls = Url.sorted_urls_by(identifier)
+        web_browser_breakdown = UserAgent.web_browser_breakdown_by(identifier)
+        os_browser_breakdown = UserAgent.web_os_breakdown_by(identifier)
+        sorted_resolutions = Resolution.sorted_resolutions_by(identifier)
+        urls_and_times = RespondedIn.urls_and_times_by(identifier)
 
-      erb :application_details, locals: {
-        identifier: identifier,
-        sorted_urls: sorted_urls,
-        web_browser_breakdown: web_browser_breakdown,
-        os_browser_breakdown: os_browser_breakdown,
-        sorted_resolutions: sorted_resolutions,
-        urls_and_times: urls_and_times
-
-        }
+        erb :application_details, locals: {
+          identifier: identifier,
+          sorted_urls: sorted_urls,
+          web_browser_breakdown: web_browser_breakdown,
+          os_browser_breakdown: os_browser_breakdown,
+          sorted_resolutions: sorted_resolutions,
+          urls_and_times: urls_and_times
+          }
+      else
+        status 403
+        body "This identifier does not exist"
+      end
     end
+    
     get '/sources/:identifier/urls/:relative/?:path?' do |identifier, relative, path|
       full_url = request.url
-      url_relative_path = Url.url_relative_path(identifier, relative)
-      url_shortest_and_longest_response = Url.url_path_shortest_and_longest_response_times(identifier, full_url)
-      url_avg_response_times = Url.url_avg_response_times(identifier, full_url)
-      url_verbs = Url.url_verbs(identifier, full_url)
-      erb :url_statistics, locals: {
-          identifier: identifier,
-          url_relative_path: url_relative_path,
-          url_shortest_and_longest_response: url_shortest_and_longest_response,
-          url_avg_response_times: url_avg_response_times,
-          url_verbs: url_verbs
-      }
+      if Url.relative_check?(identifier, full_url)
+        url_relative_path = Url.url_relative_path(identifier, relative)
+        url_shortest_and_longest_response = Url.url_path_shortest_and_longest_response_times(identifier, full_url)
+        url_avg_response_times = Url.url_avg_response_times(identifier, full_url)
+        url_verbs = Url.url_verbs(identifier, full_url)
+        erb :url_statistics, locals: {
+            identifier: identifier,
+            url_relative_path: url_relative_path,
+            url_shortest_and_longest_response: url_shortest_and_longest_response,
+            url_avg_response_times: url_avg_response_times,
+            url_verbs: url_verbs
+        }
+      else
+        status 403
+        body "This url has not been requested"
+      end
     end
   end
 end
