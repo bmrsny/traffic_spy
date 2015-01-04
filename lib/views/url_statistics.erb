@@ -1,7 +1,6 @@
 <h1>
   Url Stats!!!!
 </h1>
-<h2><%= url_shortest_response %></h2>
 <h3>
   <strong><%= identifier.capitalize %></strong>
   <p>Where the path is:
@@ -13,12 +12,14 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>Longest Response Time</th>
           <th>Shortest Response Time</th>
           <th>Url Path</th>
         </tr>
         <tbody>
           <tr>
-            <td><%= url_shortest_response[0][1] %></td>
+            <td><%= url_shortest_and_longest_response[1][:respondedIn] %></td>
+            <td><%= url_shortest_and_longest_response[0][:respondedIn] %></td>
             <td><%= identifier %><%= "/" %><%= url_relative_path %></td>
           </tr>
         </tbody>
