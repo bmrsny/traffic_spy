@@ -67,6 +67,9 @@ module TrafficSpy
 
         }
     end
+    get '/sources/:identifier/urls/:relative/?:path' do |identifier, relative, path|
 
+      erb :url_statistics
+    end
   end
 end
