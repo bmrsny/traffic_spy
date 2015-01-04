@@ -12,7 +12,6 @@ Sequel.migration do
       foreign_key   :eventName_id, :events
       foreign_key   :userAgent_id, :userAgents
       foreign_key   :resolution_id, :resolutions
-      # foreign_key   :resolution_height_id, :resolutions
       String        :ip
 
       # unique        [

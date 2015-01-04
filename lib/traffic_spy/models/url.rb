@@ -1,6 +1,7 @@
 module TrafficSpy
 
   class Url
+    extend ModelHelper
 
     def self.table
       DB.from(:urls)
@@ -28,6 +29,13 @@ module TrafficSpy
         )
         table.select(:id).to_a.last[:id]
       end
+    end
+
+    def self.sorted_urls_by(identifier)
+      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      sorted_hashes = filtered_db.to_a.map {|hash| hash[:url]}.inject(Hash.new(0)) {|hash, url| hash[url] += 1; hash}
+      desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
     end
 
     # def self.find_id_by(url)

@@ -9,3 +9,5 @@ foreign_key   :url_id, :urls
 5) alias problem in the payload.rb file in the self.sorted_by_urls method. We want to know how to create aliases because we have overlapping column names when we join tables together. How do we fix this?
 
 6) Why do we need to wrap model_helper in TrafficSpy module
+
+7) When a curl payload comes in with a requestedIn:01, it breaks. when requestedIn:11, it's chillin'.

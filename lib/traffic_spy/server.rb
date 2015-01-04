@@ -51,16 +51,20 @@ module TrafficSpy
     end
 
     get '/sources/:identifier' do |identifier|
-      sorted_urls = Payload.sorted_urls_by(identifier)
+      sorted_urls = Url.sorted_urls_by(identifier)
       web_browser_breakdown = UserAgent.web_browser_breakdown_by(identifier)
       os_browser_breakdown = UserAgent.web_os_breakdown_by(identifier)
-      sorted_resolutions = Resolution.sorted_resoutions_by(identifier)
+      sorted_resolutions = Resolution.sorted_resolutions_by(identifier)
+      urls_and_times = RespondedIn.urls_and_times_by(identifier)
 
       erb :application_details, locals: {
+        identifier: identifier,
         sorted_urls: sorted_urls,
         web_browser_breakdown: web_browser_breakdown,
         os_browser_breakdown: os_browser_breakdown,
-        identifier: identifier
+        sorted_resolutions: sorted_resolutions,
+        urls_and_times: urls_and_times
+
         }
     end
 
