@@ -46,18 +46,20 @@ module TrafficSpy
          .join
     end
 
-    def self.url_path_shortest_and_longest_response_times(identifier, relative, path, full_url)
+    def self.url_response_times(identifier, full_url)
       combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
       filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
       urls_and_times = filtered_db.select(:url, :respondedIn)
       clean_url = url_cleaner(full_url, identifier)
       filter_by_url = urls_and_times.where(:url => clean_url)
-      filter_by_url.minmax_by {|key, value| key[:respondedIn]}
+    end
 
+    def self.url_path_shortest_and_longest_response_times(identifier, full_url)
+      url_response_times(identifier, full_url).minmax_by {|key, value| key[:respondedIn]}
+    end
 
-      # filtered_by_url.map {|hash| hash[:url]}.inject(Hash.new(0)) {|hash, url| hash[url] += 1; hash}
-      #   urls_and_times = filtered_by_url.inject(Hash.new(0)) {|hash, ele| hash[ele[:url]] = ele[:respondedIn]; hash}
-      #                                 .sort_by {|k,v| v }.reverse
+    def self.url_avg_response_times(identifier, full_url)
+      url_response_times(identifier, full_url).avg(:respondedIn).to_i
     end
 
     def self.url_cleaner(full_url, identifier)

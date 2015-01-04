@@ -14,12 +14,14 @@
         <tr>
           <th>Longest Response Time</th>
           <th>Shortest Response Time</th>
+          <th>Average Response Time</th>
           <th>Url Path</th>
         </tr>
         <tbody>
           <tr>
             <td><%= url_shortest_and_longest_response[1][:respondedIn] %></td>
             <td><%= url_shortest_and_longest_response[0][:respondedIn] %></td>
+            <td><%= url_avg_response_times %></td>
             <td><%= identifier %><%= "/" %><%= url_relative_path %></td>
           </tr>
         </tbody>
