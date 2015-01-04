@@ -14,7 +14,7 @@
         <% sorted_urls.each do |url| %>
           <tr>
             <td><%= url[1] %></td>
-            <td><a href="/sources/<%= identifier %>/urls/><%= URI(url[0]).path %>"</a><%= url[0] %></td>
+            <td><a href="/sources/<%= identifier %>/urls<%= URI(url[0]).path %>"><%= url[0] %></a></td>
           </tr>
         <% end %>
         </tbody>
