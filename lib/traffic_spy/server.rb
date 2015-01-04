@@ -69,7 +69,11 @@ module TrafficSpy
     end
     get '/sources/:identifier/urls/:relative/?:path' do |identifier, relative, path|
 
-      erb :url_statistics
+        # tear off the url and push it into the view
+      erb :url_statistics, locals: {
+          identifier: identifier,
+          # sorted_urls: sorted_urls
+      }
     end
   end
 end

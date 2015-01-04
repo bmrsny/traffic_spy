@@ -38,6 +38,10 @@ module TrafficSpy
       desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
     end
 
+    def path_striper(url)
+      Uri(url)
+    end
+
     # def self.find_id_by(url)
     #   table.where(
     #   :url => url
