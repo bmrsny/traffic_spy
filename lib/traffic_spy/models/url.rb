@@ -38,6 +38,25 @@ module TrafficSpy
       desc_sorted_array = sorted_hashes.sort_by {|key, value| value}.reverse
     end
 
+    def self.url_relative_path(identifier, path)
+      sorted_urls_by(identifier).map do |array|
+        url = array[0]
+        clean_url_path = URI(url).path.gsub(/^\//, "")
+        clean_url_path
+      end.uniq.select { |sorted_path| sorted_path == path }
+         .join
+    end
+
+    def self.url_path_shortest_response(identifier, path)
+      combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:urls, :id => :url_id)
+      filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
+      filtered_by_url = filtered_db.select(:url, :respondedIn).to_a
+    
+      # filtered_by_url.map {|hash| hash[:url]}.inject(Hash.new(0)) {|hash, url| hash[url] += 1; hash}
+      #   urls_and_times = filtered_by_url.inject(Hash.new(0)) {|hash, ele| hash[ele[:url]] = ele[:respondedIn]; hash}
+      #                                 .sort_by {|k,v| v }.reverse
+    end
+
     # def self.find_id_by(url)
     #   table.where(
     #   :url => url
