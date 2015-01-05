@@ -11,3 +11,7 @@ foreign_key   :url_id, :urls
 6) Why do we need to wrap model_helper in TrafficSpy module
 
 7) When a curl payload comes in with a requestedIn:01, it breaks. when requestedIn:11, it's chillin'.
+
+8) explain ENV_TEST_ENV. What is my default environemtn when I just raun rake? Why do I need to run TRAFFIC_SPY_ENV=test rake db:reset and then TRAFFIC_SPY_ENV=test rake db:migrate
+
+9) teardown isn't working
