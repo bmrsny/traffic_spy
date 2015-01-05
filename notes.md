@@ -16,6 +16,8 @@ foreign_key   :url_id, :urls
 
 9) teardown isn't working
 
+9.5) How do capybara tests work?
+
 10) What does these line do:
 
 a)
