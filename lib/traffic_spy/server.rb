@@ -99,13 +99,20 @@ module TrafficSpy
     end
 
     get '/sources/:identifier/events/:eventname' do |identifier, eventname|
-      hours_and_frequency = Event.hours_and_frequency(identifier, eventname)
+      if Event.exist?(eventname)
+        hours_and_frequency = Event.hours_and_frequency(identifier, eventname)
+        total_sum = Event.total_sum(identifier, eventname)
 
-      erb :event_stats, locals: {
-        identifier: identifier,
-        eventname: eventname,
-        hours_and_frequency: hours_and_frequency
-      }
+        erb :event_stats, locals: {
+          identifier: identifier,
+          eventname: eventname,
+          hours_and_frequency: hours_and_frequency,
+          total_sum: total_sum
+        }
+      else
+        status 403
+        body "This event that you're looking for does not exist homie."
+      end
     end
   end
 end

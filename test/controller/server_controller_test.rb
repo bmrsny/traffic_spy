@@ -12,13 +12,13 @@ class ServerControllerTest < ControllerTest
     assert_equal 200, last_response.status
   end
 
-  def test_server_cannot_register_a_client_that_already_exists
+  def test_server_cannot_register_a_client_that_already_exists_403
     post '/sources', 'identifier=jumpstartzzzz&rootUrl=http://jumpstartlab.com'
     post '/sources', 'identifier=jumpstartzzzz&rootUrl=http://jumpstartlab.com'
     assert_equal 403, last_response.status
   end
 
-  def test_server_will_respond_with_missing_parameters
+  def test_server_will_respond_with_missing_parameters_400
     post '/sources', 'identifier=jumpstartzzzz'
     assert_equal 400, last_response.status
   end
@@ -35,7 +35,7 @@ class ServerControllerTest < ControllerTest
 
   def test_identifier_doesnt_exist_in_database_when_this_page_is_visited_first_time
     get '/sources/jumpstartlab'
-    assert last_response.ok?
+    refute last_response.ok?
     assert_equal 403, last_response.status
   end
 
@@ -52,10 +52,8 @@ class ServerControllerTest < ControllerTest
   def test_it_returns_a_403_status_and_error_message_with_missing_parameters_identifier
     post '/sources', 'identifier=github&rootUrl=http://jumpstartlab.com'
     assert last_response.ok?
-    assert_equal 200, last_response.body
-
     post '/sources', 'identifier=github&rootUrl=http://jumpstartlab.com'
     refute last_response.ok?
-    assert_equal 403, last_response.body
+    assert_equal 403, last_response.status
   end
 end
