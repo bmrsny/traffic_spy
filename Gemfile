@@ -15,17 +15,16 @@ group :development do
   gem 'pry-byebug'
 end
 
-group :evaluations do
-  # THIS SPACE RESERVED FOR EVALUATIONS
-  gem 'cane'
-  gem 'reek'
-  gem 'rake'
-end
-
-
 group :test do
   gem 'capybara'
   gem 'minitest'
   gem 'rack-test'
   gem 'nokogiri'
+end
+
+group :evaluations do
+  # THIS SPACE RESERVED FOR EVALUATIONS
+  gem 'cane'
+  gem 'reek'
+  gem 'rake'
 end

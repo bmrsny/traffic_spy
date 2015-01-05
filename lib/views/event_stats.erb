@@ -1,1 +1,34 @@
-<h1><%= eventname %> belongs here</h1>
+<h1>
+  <strong><%= identifier.capitalize %></strong>
+</h1>
+<h3>Event by Name Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Hour Period</th>
+          <th>Events Recieved by hour</th>
+          <th>Event Name</th>
+        </tr>
+        <tbody>
+          <% (0..23).each do |num| %>
+            <tr>
+              <% if num == 24 %>
+                <% num = 00 %>
+              <% else %>
+                <td><%= num %>-<%= num + 1 %></td>
+                <% if hours_and_frequency.keys.include?(sprintf('%02d', num)) %>
+                  <td><%= hours_and_frequency[sprintf('%02d', num)] %></td>
+                  <td><%= eventname %></td>
+                <% else %>
+                  <td><%= 0 %></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
