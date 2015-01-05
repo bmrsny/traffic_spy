@@ -12,6 +12,8 @@ end
 
 # Require all the files within the model directory here...
 require 'uri'
+require 'date'
+require 'time'
 require 'traffic_spy/models/model_helper'
 require 'traffic_spy/models/source'
 require 'traffic_spy/models/url'
