@@ -43,7 +43,7 @@ module TrafficSpy
       filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
 
       #filtered_db.inject(Hash.new(0)) {|hash, ele| hash[DateTime.parse("#{ele[:requestedAt]}").strftime('%H')] += 1; hash}
-      filtered_db.inject(Hash.new(0)) {|hash, ele| hash["#{ele[:requestedAt]}".split[1].split(':').first += 1; hash}
+      filtered_db.inject(Hash.new(0)) {|hash, ele| hash["#{ele[:requestedAt]}".split[1].split(':').first] += 1; hash}
 
     end
 
