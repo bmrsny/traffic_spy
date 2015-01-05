@@ -20,6 +20,7 @@ group :test do
   gem 'minitest'
   gem 'rack-test'
   gem 'nokogiri'
+  gem 'sqlite3'
 end
 
 group :evaluations do
