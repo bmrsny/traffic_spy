@@ -21,4 +21,13 @@ class ServerControllerTest < Minitest::Test
     assert_equal "Missing Parameter(s)", last_response.body
 
   end
+
+  def test_it_returns_a_403_status_and_error_message_with_missing_parameters
+    post '/sources', 'identifier=github&rootUrl=http://jumpstartlab.com'
+    assert last_response.ok?
+    assert_equal 200, last_response.body
+
+    post '/sources', 'identifier=github&rootUrl=http://jumpstartlab.com'
+    assert_equal 403, last_response.body
+  end
 end
