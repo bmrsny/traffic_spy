@@ -99,12 +99,12 @@ module TrafficSpy
     end
 
     get '/sources/:identifier/events/:eventname' do |identifier, eventname|
-      event_hourly_breakdown = Event.hourly_breakdown(identifier, eventname)
+      hours_and_frequency = Event.hours_and_frequency(identifier, eventname)
 
       erb :event_stats, locals: {
         identifier: identifier,
         eventname: eventname,
-        event_hourly_breakdown: event_hourly_breakdown
+        hours_and_frequency: hours_and_frequency
       }
     end
   end

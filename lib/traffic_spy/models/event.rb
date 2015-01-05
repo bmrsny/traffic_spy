@@ -38,12 +38,14 @@ module TrafficSpy
       end
     end
 
-    def self.hourly_breakdown(identifier, eventname)
+    def self.hours_and_frequency(identifier, eventname)
       combined_db = DB.from(:sources).join(:payloads, :source_id => :id).join(:events, :id => :eventName_id)
       filtered_db = combined_db.filter(:source_id => identifier_id(identifier))
 
       #filtered_db.inject(Hash.new(0)) {|hash, ele| hash[DateTime.parse("#{ele[:requestedAt]}").strftime('%H')] += 1; hash}
-      filtered_db.inject(Hash.new(0)) {|hash, ele| hash["#{ele[:requestedAt]}".split[1].split(':').first] += 1; hash}
+      filtered_db.inject(Hash.new(0)) do |hash, ele|
+        hash["#{ele[:requestedAt]}".split[1].split(':').first] += 1; hash
+      end
     end
 
   end

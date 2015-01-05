@@ -12,12 +12,20 @@
           <th>Event Name</th>
         </tr>
         <tbody>
-          <% event_hourly_breakdown.each do |event| %>
-          <tr>
-            <td><%= event[0] %>-<%= event[0].to_i + 1  %></td>
-            <td><%= event[1] %></td>
-            <td><%= eventname %></td>
-          </tr>
+          <% (0..23).each do |num| %>
+            <tr>
+              <% if num == 24 %>
+                <% num = 00 %>
+              <% else %>
+                <td><%= num %>-<%= num + 1 %></td>
+                <% if hours_and_frequency.keys.include?(sprintf('%02d', num)) %>
+                  <td><%= hours_and_frequency[sprintf('%02d', num)] %></td>
+                  <td><%= eventname %></td>
+                <% else %>
+                  <td><%= 0 %></td>
+                <% end %>
+              <% end %>
+            </tr>
           <% end %>
         </tbody>
       </thead>
