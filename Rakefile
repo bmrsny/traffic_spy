@@ -1,4 +1,4 @@
-require "bundler/gem_tasks"
+require "bundler/gem_tasks" #what is this?
 Bundler.require
 
 require 'rake/testtask'

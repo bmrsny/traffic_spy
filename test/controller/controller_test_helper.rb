@@ -1,12 +1,7 @@
-require_relative '../test_helper'
+require_relative "../test_helper"
+require_relative "../../lib/traffic_spy"
 
-class ServerControllerTest < Minitest::Test
-  # include Rack::Test::Methods
-
-  def app
-    TrafficSpy::Server
-  end
-
+class ControllerTest < Minitest::Test
   def teardown
     TrafficSpy::DB.from(:sources).delete
     TrafficSpy::DB.from(:urls).delete
@@ -16,10 +11,6 @@ class ServerControllerTest < Minitest::Test
     TrafficSpy::DB.from(:UserAgent).delete
     TrafficSpy::DB.from(:resolution).delete
     TrafficSpy::DB.from(:event).delete
-  end
-
-  def test_server_can_register_a_client_with_200_status
-    post '/sources', 'identifier=jumpstartlab&rootUrl=http://jumpstartlab.com'
-    assert_equal 200, last_response.status
+    TrafficSpy::DB.from(:sqlite_sequence).delete
   end
 end
