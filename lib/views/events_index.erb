@@ -12,7 +12,7 @@
         <tbody>
           <% sorted_events.each do |event| %>
           <tr>
-            <td><%= event[:event] %></td>
+            <td><a href="/sources/<%= identifier %>/events/<%= event[:event] %>"><%= event[:event] %></a></td>
           </tr>
           <% end %>
         </tbody>

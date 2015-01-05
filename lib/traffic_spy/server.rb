@@ -97,5 +97,11 @@ module TrafficSpy
 
       erb :events_index, locals: {sorted_events: sorted_events, identifier: identifier}
     end
+
+    get '/sources/:identifier/events/:eventname' do |identifier, eventname|
+      x = Event.hourly_breakdown(identifier, eventname)
+      require 'pry' ; binding.pry
+      erb :event_stats, locals: {eventname: eventname}
+    end
   end
 end
