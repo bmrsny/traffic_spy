@@ -20,7 +20,7 @@
                 <td><%= num %>-<%= num + 1 %></td>
                 <% if hours_and_frequency.keys.include?(sprintf('%02d', num)) %>
                   <td><%= hours_and_frequency[sprintf('%02d', num)] %></td>
-                  <td><%= eventname %></td>
+                  <td><a href="/sources/<%= identifier %>/events"><%= eventname %></a></td>
                 <% else %>
                   <td><%= 0 %></td>
                 <% end %>
