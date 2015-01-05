@@ -15,3 +15,28 @@ foreign_key   :url_id, :urls
 8) explain ENV_TEST_ENV. What is my default environemtn when I just raun rake? Why do I need to run TRAFFIC_SPY_ENV=test rake db:reset and then TRAFFIC_SPY_ENV=test rake db:migrate
 
 9) teardown isn't working
+
+10) What does these line do:
+
+a)
+Sequel::Migrator.run(@database, "db/migrations", :target => 0)
+
+b)
+ENV["TRAFFIC_SPY_ENV"] ||= "test"
+
+c)
+require "bundler/gem_tasks" #what is this?
+Bundler.require
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+t.pattern = "test/*/*_test.rb"
+end
+
+task :default => "test"
+
+d)
+Say I am curious what:
+require 'rake/testtask'
+is doing... what is the best way to research this?
