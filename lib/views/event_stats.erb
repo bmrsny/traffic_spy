@@ -1,1 +1,26 @@
-<h1><%= eventname %> belongs here</h1>
+<h1>
+  <strong><%= identifier.capitalize %></strong>
+</h1>
+<h3>Event by Name Breakdown</h3>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Hour Period</th>
+          <th>Events Recieved by hour</th>
+          <th>Event Name</th>
+        </tr>
+        <tbody>
+          <% event_hourly_breakdown.each do |event| %>
+          <tr>
+            <td><%= event[0] %>-<%= event[0].to_i + 1  %></td>
+            <td><%= event[1] %></td>
+            <td><%= eventname %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </thead>
+    </table>
+  </div>
+</div>
