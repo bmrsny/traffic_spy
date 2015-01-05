@@ -48,5 +48,9 @@ module TrafficSpy
       end
     end
 
+    def self.total_sum(identifier, eventname)
+      hours_and_frequency(identifier, eventname).values.reduce(:+)
+    end
+
   end
 end
