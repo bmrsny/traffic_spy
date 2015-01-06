@@ -1,3 +1,9 @@
+WE BE SPYING
+
+# Group Project From Turing School of Software Development and Desgn
+# Group of three equally worked on this web app
+#
+
 # TrafficSpy
 
 TODO: Write a gem description
